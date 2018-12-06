@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule	^warning$ warning.php
+RewriteRule	^owner$ owner.php
+RewriteRule	^calendar$ calendar.php
+RewriteRule	^price-table$ price_table.php

@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule	^remove-branch$ remove_branch.php

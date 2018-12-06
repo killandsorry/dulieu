@@ -1,0 +1,57 @@
+<tr class="item_add" id="item_{{id}}" data-id="{{id}}">
+   <td width="5"><span title="xóa dòng dữ liệu" onclick="pm.remove_item(this)" class="sm_del">&#215;</span></td>
+   <td>
+      {{usp_pro_name}}<br />
+      <i class="fs">{{unit_note}}</i>      
+   </td>
+   <td class="t_c">
+      <input type="tel" name="unit_parent[{{id}}]" class="px30 t_c input_add type_number" id="unit_parent_{{id}}" onkeyup="pm.change_price_import(this);" value="{{unit_parent}}" />
+      <br /><i class="fs">({{unit_import}})</i>
+   </td>
+   <td class="t_c">&#215;</td>
+   <td class="t_c">
+      <input type="tel" name="unit_child[{{id}}]" class="px30 t_c tran input_add type_number no_border" id="usp_packing_{{id}}" readonly="true" onkeyup="pm.change_price_import(this)" value="{{usp_packing}}" />
+      <br /><i class="fs">({{unit}})</i>
+   </td>
+   <td class="t_c">=</td>
+   <td class="t_c">
+      <input type="tel" name="total_unit_child[{{id}}]" class="px50 t_c input_add type_number no_border tran" readonly="true"  title="Chỉ để xem" id="total_count_{{id}}" value="{{total_count}}" />
+      <br /><i class="fs">({{unit}})</i>
+   </td>
+   <td class="t_r">
+      <input type="tel" name="price_import[{{id}}]" class="px70 t_r input_add type_number price" onkeyup="pm.change_price_import(this);" id="price_import_{{id}}" value="{{price_import}}" />
+      <br /><i class="fs">/ ({{unit_import}})</i>
+   </td>
+   
+   <!--<td width="60" class="">
+      <div class="pos_r">
+         <input class="px60 price t_r input_add type_number discount" id="total_discount_{{id}}" type="tel" readonly="true" value="{{discount_money}}" onclick="discount.show(this)" />
+         
+         <p class="show_discount hide fs11">
+            Khuyến mại:
+            <input type="tel" value="{{discount_value}}" class="type_number price t_r px60 pd3 money_discount" onkeyup="discount.caculator(this)" />            
+            <span class="icon_discount {{dis_class_p}}" data-dis="2" onclick="discount.chose(this)">%</span>
+            <span class="icon_discount {{dis_class_v}}" data-dis="1" onclick="discount.chose(this)">vnđ</span>
+            <input type="hidden" value="{{discount_type}}" class="type_discount" />
+         </p>
+      </div>            
+   </td>-->
+   <td width="70" class="t_r">
+      <input class="px70 fb price t_r input_add type_number tran" id="total_import_money_{{id}}" readonly="true" type="tel" value="{{total_import_money}}" />      
+   </td>
+   
+   <td width="50" class="t_r">
+      <input  name="price_coc[{{id}}]" class="px60 t_r input_add type_number no_border price tran" type="tel" title="Chỉ để xem" readonly="true" id="price_import_small_{{id}}" value="{{price_import_small}}" />
+      <br /><i class="fs">/ ({{unit}})</i>
+   </td>
+   <td width="70" class="t_r">
+      <input name="price_export[{{id}}]" class="px60 t_r input_add type_number price" type="tel" id="price_export_{{id}}" onkeyup="pm.change_price_import(this)" value="{{price_export}}" />
+      <br /><i class="fs">/ ({{unit}})</i>
+   </td>                  
+   <td width="60" class="t_r">
+      <input type="text" name="lo[{{id}}]" class="px60 t_c input_add" id="usp_lo_{{id}}" value="" />
+   </td>
+   <td width="80" class="t_r">
+      <input type="text" name="date_expires[{{id}}]" class="px80 t_c input_add" value="" id="usp_date_expires_{{id}}" />
+   </td>
+</tr>

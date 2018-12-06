@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteRule	^category$ category.php
+RewriteRule	^list$ list.php
+RewriteRule	^list-sale$ list_sale.php
+RewriteRule	^combo$ combo.php
+
+RewriteRule	^check-warehouse$ check_warehouse.php
+RewriteRule	^check-list$ check_list.php
+
+RewriteRule	^product-expires$ product_expires.php
+RewriteRule	^product-warning$ product_warning.php
+
+RewriteRule	^product-print$ product_print.php

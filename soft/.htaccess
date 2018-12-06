@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule	^login$ login.php
+RewriteRule	^register$ register.php

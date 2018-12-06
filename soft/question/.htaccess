@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule	^sale-day$ sale_day.php
+RewriteRule	^sale-staff$ sale_staff.php
+RewriteRule	^sale-month$ sale_month.php
+RewriteRule	^sale-branch$ sale_branch.php

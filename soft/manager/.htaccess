@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteRule	^branch$ branch.php
+RewriteRule	^branch-set$ branch_set.php
+
+RewriteRule	^history$ history.php
+RewriteRule	^staff$ staff.php
+
+RewriteRule	^money-add$ money_add.php
+RewriteRule	^money-list$ money_list.php
+
+RewriteRule	^price-remain$ price_remain.php

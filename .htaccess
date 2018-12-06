@@ -1,0 +1,30 @@
+RewriteEngine On
+
+RewriteRule ^soft$ soft/index.php
+
+#Nhập
+RewriteRule	/nhap/add$ home/nhap/add.php
+RewriteRule	/nhap/add-excell$ home/nhap/add_excell.php
+RewriteRule	/nhap/history$ home/nhap/history.php
+
+#Bán
+RewriteRule	/ban/sale-one$ home/ban/sale_one.php
+RewriteRule	/ban/sale-multi$ home/ban/sale_multi.php
+RewriteRule	/ban/history$ home/ban/history.php
+
+#manager
+RewriteRule	/kho/add$ home/kho/add.php
+RewriteRule	/kho/process$ home/kho/process.php
+RewriteRule	/kho/history$ home/kho/history.php
+
+#setting
+RewriteRule	/caidat/product$ home/caidat/product.php
+
+
+#action
+
+
+#report
+
+
+#quest

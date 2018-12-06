@@ -1,0 +1,81 @@
+*{
+   padding: 0;
+   margin: 0;
+   font-size: 13px;
+   box-sizing: border-box;
+   font-family: Roboto;
+   list-style: none;
+}
+.login{
+   height: 100%;
+   width: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
+}
+.error{
+   color: #f00;
+   padding-bottom: 10px;
+   text-align: center;
+}
+.content_login{
+   margin: 5% auto;
+   width: 80%;
+   max-width: 300px;
+}
+.content_register{
+   margin: 3% auto;
+   width: 80%;
+   max-width: 300px;
+   overflow: auto;
+   height: 100%;
+   box-sizing: border-box;
+}
+h1{
+   text-align: center;
+   font-size: 20px;
+   font-weight: 500;
+   margin: 0 0 20px 0;
+}
+.row{
+   
+}
+.row li{
+   display: block;
+   padding: 10px 0;
+   font-size: 13px;
+}
+.row li i{
+   color: #888;
+   font-size: 12px;
+   display: block;
+   margin-top: 4px;
+}
+input[type=text], input[type=password]{
+   margin-top: 3px;
+   width: 100%;
+   box-sizing: border-box;
+   padding: 5px;
+   font-size: 14px;
+   border: 1px solid #ddd;
+   border-radius: 2px;
+}
+.btn{
+   padding: 10px;
+   border-radius: 3px;
+   border: none;
+   width: 100%;
+   font-size: 15px;
+   cursor: pointer;
+}
+.btn_login{
+   color: #fff;
+   background-color: #25a20c;
+}
+.question{
+   color: #666;
+   text-align: center;
+}
+.question a{
+   color: #4C8BF5;
+}

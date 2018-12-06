@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule	^sales-staff$ sales_staff.php
+RewriteRule	^send-lock-book$ send_lock_book.php
+
+RewriteRule	^list-lock-book$ list_lock_book.php

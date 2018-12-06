@@ -1,0 +1,10 @@
+- Bán theo liều
+- Nhân viên chỉ đc bán không được biết giá nhập
+- chuyển kho nhân viên cũng không đc biết giá nhập
+- chốt sổ phải có mục tiền thừa
+- quản lý nhập xuất
+- có nhiều bảng giá, bán buôn, bán lẻ hoặc giá cả linh động
+- bán giảm giá thì không cho vào thuốc doanh số
+- giảm giá bán sản phẩm, hóa đơn
+- tiền bán hàng doanh số
+- nhập tổng tiền nhập => tự chia ra giá trên sản phẩm

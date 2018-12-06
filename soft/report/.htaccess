@@ -1,0 +1,21 @@
+RewriteEngine On
+
+RewriteRule	^sales-day$ sale_day.php
+RewriteRule	^sales-staff$ sale_staff.php
+RewriteRule	^sales-month$ sale_month.php
+RewriteRule	^sales-branch$ sale_branch.php
+
+RewriteRule	^profit-saler$ profit_saler.php
+RewriteRule	^quantity-saler$ quantity_saler.php
+RewriteRule	^small-saler$ small_saler.php
+RewriteRule	^deficit-saler$ deficit_saler.php
+
+RewriteRule	^survive-branch$ survive_branch.php
+RewriteRule	^survive-all$ survive_all.php
+
+RewriteRule	^index-import-sale$ index_import_sale.php
+RewriteRule	^cal$ cal.php
+
+RewriteRule	^index-all$ index_all.php
+RewriteRule	^report-month$ report_month.php
+RewriteRule	^report-year$ report_year.php

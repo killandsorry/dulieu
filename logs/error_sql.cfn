@@ -1,0 +1,56 @@
+01/12/2018 06:19:21 PM /ajaxs/ajax_warehouse_update_template.php
+ You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
+                                       usw_number = 50,
+' at line 7
+UPDATE user_warehouse_1 SET
+                                       usw_number_unit_parent = 5,
+                                       usw_number_unit_child   = 10,
+                                       usw_price_import     = 5000,
+                                       usw_price_export     = 0,
+                                       usw_lo  = '0'
+                                       usw_date_expires = 0,
+                                       usw_number = 50,
+                                       usw_total_money_import = 25000
+                                       WHERE usw_id = 60
+01/12/2018 06:19:30 PM /ajaxs/ajax_warehouse_update_template.php
+ You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
+                                       usw_number = 50,
+' at line 7
+UPDATE user_warehouse_1 SET
+                                       usw_number_unit_parent = 5,
+                                       usw_number_unit_child   = 10,
+                                       usw_price_import     = 5000,
+                                       usw_price_export     = 0,
+                                       usw_lo  = '0'
+                                       usw_date_expires = 0,
+                                       usw_number = 50,
+                                       usw_total_money_import = 25000
+                                       WHERE usw_id = 60
+01/12/2018 06:20:28 PM /ajaxs/ajax_warehouse_update_template.php
+ You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
+                                       usw_number = 50,
+' at line 7
+UPDATE user_warehouse_1 SET
+                                       usw_number_unit_parent = 5,
+                                       usw_number_unit_child   = 10,
+                                       usw_price_import     = 5000,
+                                       usw_price_export     = 0,
+                                       usw_lo  = '0'
+                                       usw_date_expires = 0,
+                                       usw_number = 50,
+                                       usw_total_money_import = 25000
+                                       WHERE usw_id = 60
+01/12/2018 06:21:09 PM /ajaxs/ajax_warehouse_update_template.php
+ You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
+                                       usw_number = 50,
+' at line 7
+UPDATE user_warehouse_1 SET
+                                       usw_number_unit_parent = 5,
+                                       usw_number_unit_child   = 10,
+                                       usw_price_import     = 5000,
+                                       usw_price_export     = 0,
+                                       usw_lo  = '0'
+                                       usw_date_expires = 0,
+                                       usw_number = 50,
+                                       usw_total_money_import = 25000
+                                       WHERE usw_id = 60

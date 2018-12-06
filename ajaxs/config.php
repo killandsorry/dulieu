@@ -1,0 +1,2 @@
+<?
+include '../soft/config.php';

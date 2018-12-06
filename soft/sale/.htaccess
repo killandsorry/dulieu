@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteRule	^add$ add.php
+RewriteRule	^list$ list.php
+RewriteRule	^list-bonus$ list_bonus.php
+
+RewriteRule	^customer$ customer.php
+
+RewriteRule	^access-lock-book$ access_lock_book.php
