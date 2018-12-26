@@ -3,7 +3,7 @@
  * Class xử lý các phương thức kho
  */
  
-class killWareHouse{
+class killWareHouseTemplate{
    
    function __construct(){
       
@@ -69,7 +69,7 @@ class killWareHouse{
             }else{
                /** Thêm example vào bảng warehouse */
                $db_ex = new db_execute_return();
-               $template_id  = $db_ex->db_execute("  INSERT INTO " . TABLE_WAREHOUSE ."
+               $template_id  = $db_ex->db_execute("  INSERT INTO " . TABLE_WAREHOUSE_TEMPLATE ."
                                                 (usw_branch_id,usw_use_parent_id,usw_use_child_id,usw_usp_id
                                                 ,usw_dat_id,usw_date_create,usw_unit,usw_price_import
                                                 ,usw_type,usw_number_unit_parent,usw_number_unit_child
@@ -111,7 +111,9 @@ class killWareHouse{
                   ,'price_export'         => 0
                   ,'total_import_money'   => format_currency($warehouse_total_money)
                   ,'price_import_small'   => format_currency($price_import_small)
-                  ,'unit_note'            => '1 ' . $array_unit[$row['usp_unit_import']] . ' ' . $row['usp_packing'] . ' ' . $array_unit[$row['usp_unit']] 
+                  ,'unit_note'            => '1 ' . $array_unit[$row['usp_unit_import']] . ' ' . $row['usp_packing'] . ' ' . $array_unit[$row['usp_unit']]
+                  ,'lo'                   => ''
+                  ,'date_expires'         => '' 
                );
                
                foreach($dataReplate as $key => $value){
@@ -150,7 +152,7 @@ class killWareHouse{
       // id sản phẩm
       if($id > 0) $sql_where = " AND usw_usp_id = " . intval($id);
       
-      $db_template   = new db_query("SELECT * FROM " . TABLE_WAREHOUSE . "
+      $db_template   = new db_query("SELECT * FROM " . TABLE_WAREHOUSE_TEMPLATE . "
                                        WHERE usw_status = 0 ". $sql_where, 
                                        "File: " . __FILE__ . " Line: " . __LINE__);
       while($row     = $db_template->fetch()){
@@ -185,13 +187,22 @@ class killWareHouse{
             $price_import  = $row['usw_price_import'];
             $price_export  = $row['usw_price_export'];
             $lo            = $row['usw_lo'];
-            $date_expires  = $row['usw_date_expires'];
+            $date_expires  = 0;
+            $arrayDate     = explode('/', $row['usw_date_expires']);
+            if(!empty($arrayDate)){
+               $day        = isset($arrayDate[0])? $arrayDate[0] : 0;
+               $month      = isset($arrayDate[1])? $arrayDate[1] : 0;
+               $year       = isset($arrayDate[2])? $arrayDate[2] : 0;
+               if($day > 0 && $month > 0 && $year > 0){
+                  $date_expires  = mktime(0,0,0, $month, $day, $year);
+               }
+            }
             
             // thông tin update
             $number              = $unit_parent * $unit_child;
             $total_money_import  = $price_import * $unit_parent;
             
-            $db_ex   = new db_execute("UPDATE " . TABLE_WAREHOUSE . " SET
+            $db_ex   = new db_execute("UPDATE " . TABLE_WAREHOUSE_TEMPLATE . " SET
                                        usw_number_unit_parent = " . intval($unit_parent) . ",
                                        usw_number_unit_child   = ". intval($unit_child) .",
                                        usw_price_import     = ". doubleval($price_import) .",
@@ -214,4 +225,18 @@ class killWareHouse{
       return $result;
       
    }          
+   
+   
+   /**
+    * Function delete_template (delete template id)
+    */
+   function delete_template($usw_id = 0){
+      if($usw_id > 0){
+         $db_ex   = new db_execute("DELETE FROM " . TABLE_WAREHOUSE_TEMPLATE . "
+                                       WHERE usw_id = " . intval($usw_id) . "
+                                       AND usw_branch_id = " . BRANCH_ID . "
+                                       AND usw_use_parent_id = " . ADMIN_ID);
+         unset($db_ex);
+      }
+   }    
 }

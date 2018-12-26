@@ -1,5 +1,5 @@
 <?
-define('ROOT' , '/soft/');
+
 define("PATH_ASSET", '/asset/');
 define('PATH_CSS', '/asset/css/');
 define('PATH_JS', '/asset/js/');
@@ -12,6 +12,31 @@ define('TYPE_BH', 4); // bán hàng
 define('TYPE_KT', 5); // khởi tạo sp mới
 define('TYPE_KTH', 6); // khách trả hàng
 
+define('TYPE_PAYMENT_TM', 101); // thanh toán tiền mặt: - tiền mặt tại két
+define('TYPE_PAYMENT_CK', 102); // thanh toán chuyển khoản: - tiền trong thẻ ngân hàng
+
+// bill type in table user_bill
+define('STOCK_CARD_TYPE_IN', 1); // loại hóa đơn nhập
+define('STOCK_CARD_TYPE_OUT', 0); // loại hóa đơn bán
+
+// page size
+define('PAGE_SIZE', 20); // số bản ghi / trang
+
+// config page
+$page_prefix      = "";
+$normal_class     = "page";
+$selected_class   = "page_current";
+$previous         = "<";
+$next             = ">";
+$first            = "<<";
+$last             = ">>";
+$break_type       = 2;//"1 => << < 1 2 [3] 4 5 > >>", "2 => < 1 2 [3] 4 5 >", "3 => 1 2 [3] 4 5", "4 => < >"
+$pageurl          = $_SERVER["REQUEST_URI"];
+$tmpUrl           = explode("&page=", $pageurl);
+$pageurl          = $tmpUrl[0];
+if (strpos($pageurl, '?') === false) $pageurl .= '?';
+$current_page     = isset($tmpUrl[1]) ? intval($tmpUrl[1]) : 1;
+
 
 $web_sortname  = 'QLBT';
 $web_fullname  = 'Phần mềm nhà thuốc'; 
@@ -23,13 +48,14 @@ $version_up       = rand(11111,99999);
 
 $path_css   = PATH_CSS . 'common.css';
 $arrayJs    = array(
-   'jquery.js', 'common.js', 'shortcut.js'
+   'jquery.js', 'common.js', 'shortcut.js', 'zebra_datepicker.min.js'
 );
 
 //<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,500,700&amp;subset=vietnamese" rel="stylesheet">
 $css        = '<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&amp;subset=vietnamese" rel="stylesheet">';
 $css        .= '<link href="'. $path_css .'?v='. $version_up .'" type="text/css" rel="stylesheet" />';
 $css        .= '<link href="'. PATH_ASSET . 'data/font/flaticon.css?v='. $version_up .'" type="text/css" rel="stylesheet" />';
+$css        .= '<link href="'. PATH_ASSET .'css/zebra_datepicker.min.css?v='. $version_up .'" type="text/css" rel="stylesheet" />';
 
 $js         = '';
 foreach($arrayJs as $file){
@@ -37,16 +63,12 @@ foreach($arrayJs as $file){
 }
 
 
-define('TM', 101); // thanh toán tiền mặt: - tiền mặt tại két
-define('CK', 102); // thanh toán chuyển khoản: - tiền trong thẻ ngân hàng
 
-define('STOCK_CARD_TYPE_IN', 1); // loại hóa đơn nhập
-define('STOCK_CARD_TYPE_OUT', 0); // loại hóa đơn bán
 
 // array pay method
 $arrayPayMethod = array(
-   TM => 'Tiền mặt',
-   CK => 'Chuyển khoản'
+   TYPE_PAYMENT_TM => 'Tiền mặt',
+   TYPE_PAYMENT_CK => 'Chuyển khoản'
 );
 
 // đơn vị tính

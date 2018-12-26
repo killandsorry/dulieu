@@ -3,7 +3,7 @@
  * Class xử lý các phương thức bán hàng
  */
  
-class killSale{
+class killSaleTemplate{
    
    function __construct(){
       

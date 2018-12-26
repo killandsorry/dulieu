@@ -29,12 +29,12 @@ if($usp_id > 0){
       
       /** form nhập kho thì dùng class nhập kho thêm template sản phẩm */
       case 'warehouse':
-         $dataTemp = $killWareHouse->insert_template($result_add);
+         $dataTemp = $killWareHouseTemplate->insert_template($result_add);
          break;
          
       /** form bán hàng thì dùng class bán hàng thêm template sản phẩm */               
       case 'sale':
-         $dataTemp = $killSale->insert_template($result_add);
+         $dataTemp = $killSaleTemplate->insert_template($result_add);
          break;
    }
    

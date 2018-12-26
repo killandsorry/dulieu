@@ -16,12 +16,12 @@ if($id <= 0){
    $result['error'] = 'Thông tin xóa lịch sử không đúng';
 }else{
    $db_check   = new db_query("SELECT usw_id 
-                                 FROM ". TABLE_WAREHOUSE . " 
+                                 FROM ". TABLE_WAREHOUSE_TEMPLATE . " 
                                  WHERE usw_id = " . intval($id) . " AND usw_status = 0
                                  LIMIT 1");
    if($row  = $db_check->fetch()){
       // xóa bản ghi
-      $db_del  = new db_execute("DELETE FROM " . TABLE_WAREHOUSE . " WHERE usw_id = " . intval($id));
+      $db_del  = new db_execute("DELETE FROM " . TABLE_WAREHOUSE_TEMPLATE . " WHERE usw_id = " . intval($id));
       unset($db_del);
       
       $result['code'] = 200;

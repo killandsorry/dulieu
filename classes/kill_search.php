@@ -43,8 +43,8 @@ class killSearch{
             'unit'   => '1 ' . $unit_import . ' / ' . $row['usp_packing'] . ' ' . $unit,
             'type'   => 'Danh sách thuốc trong kho',            
             'temp' => $row['usp_dat_id'],
-            'remain' => format_number($row['usp_remain']),
-            'remain_name' => ' - Tồn: <b class="cl0 fs11">'. $row['usp_remain'] .'</b>'
+            'remain' => format_currency($row['usp_remain']),
+            'remain_name' => ' - Tồn: <b class="cl0 fs11">'. format_currency($row['usp_remain']) .'</b> ' . $unit
          );
       }  
       unset($db_pro);     

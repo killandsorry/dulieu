@@ -1020,7 +1020,7 @@ function format_number($number, $edit=0, $intval = 0){
 function parse_type_number($vl = 0){
    if($vl == '') return '';
    if($vl <= 0) return 0;
-   $new_vl  = str_replace('.', '', $vl);
+   $new_vl  = str_replace(',', '', $vl);
    return intval($new_vl);
 }
 

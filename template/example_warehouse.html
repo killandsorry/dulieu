@@ -49,9 +49,9 @@
       <br /><i class="fs">/ ({{unit}})</i>
    </td>                  
    <td width="60" class="t_r">
-      <input type="text" name="lo[{{id}}]" class="px60 t_c input_add" id="usp_lo_{{id}}" value="" />
+      <input type="text" name="lo[{{id}}]" class="px60 t_c input_add" id="usp_lo_{{id}}" value="{{lo}}" onkeyup="pm.change_price_import(this)" />
    </td>
    <td width="80" class="t_r">
-      <input type="text" name="date_expires[{{id}}]" class="px80 t_c input_add" value="" id="usp_date_expires_{{id}}" />
+      <input type="text" name="date_expires[{{id}}]" class="px80 t_c input_add" value="{{date_expires}}" id="usp_date_expires_{{id}}" onkeyup="pm.change_price_import(this)" />
    </td>
 </tr>

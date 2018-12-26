@@ -35,6 +35,7 @@
                <td colspan="2">
                   <input type="submit" class="btn btn_do" value="Thêm NCC" onclick="return pm.quick_add_provider()" />
                   <input type="button" class="btn btn_cancel" value="Bỏ qua" onclick="pm.hide_quick_add_provider()" />
+                  <input type="hidden" value="0" name="prd_id" id="prd_id" />
                </td>
             </tr>
          </table>

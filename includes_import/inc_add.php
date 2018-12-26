@@ -1,13 +1,31 @@
 <?
+$errMsg     = '';
+
+// bắt đầu submit dữ liệu
 $action  = getValue('action', 'str', 'POST', '');
 if($action == 'add'){
-   echo '<pre>';
-   print_r($_POST);
+   $dataPost   = isset($_POST)? $_POST : array();
+   
+   if(empty($dataPost)){
+      $errMsg  = 'Không có thông tin nhập hàng';
+   }else{
+      
+      $result  = $killStockCard->add_stock_card($dataPost);
+      
+      if($result['code'] == 500){
+         $errMsg  = $result['error'];
+      }else{
+         $errMsg  = 'Thành công';
+      }
+      
+      
+   }
 }
 ?>
 <div id="content">
    <div class="responsive fullh ovh">
       <form method="post" action="" class="fullh ovh">
+         <p class="error"><?=$errMsg?></p>
          <div class="col w75 fl fullh pd5 form_cal">
             <div class="find_pro">
                <span class="flaticon-barcode icon_barcode"></span>
@@ -38,11 +56,10 @@ if($action == 'add'){
                   <tbody id="bodyappend">
                      <?
                         // lấy thông tin các phiếu đang có sẵn
-                        $dataTemplate     = $killWareHouse->get_insert_template();
+                        $dataTemplate     = $killWareHouseTemplate->get_insert_template();
                         $total_money_temp = 0;
                         $bill_code        = date('ymdHi');
-                        
-                        
+                                                
                         if(!empty($dataTemplate)){
                            foreach($dataTemplate as $temp){
                               $productInfo         = $killProduct->get_product_by_id($temp['usw_usp_id']);
@@ -67,6 +84,8 @@ if($action == 'add'){
                                  ,'total_import_money'   => format_currency($temp['usw_total_money_import'])
                                  ,'price_import_small'   => format_currency($price_import_small)
                                  ,'unit_note'            => '1 ' . $array_unit[$productInfo['usp_unit_import']] . ' ' . $productInfo['usp_packing'] . ' ' . $array_unit[$productInfo['usp_unit']]
+                                 ,'lo'                   => $temp['usw_lo']
+                                 ,'date_expires'         => ($temp['usw_date_expires'] > 0)? date('d/m/Y', $temp['usw_date_expires']) : ''
                                  /*,'discount_money'       =>
                                  ,'discount_value'       =>
                                  ,'discount_type'        =>
@@ -157,7 +176,7 @@ if($action == 'add'){
                <tr>
                   <td class="w40">Hình thức trả:</td>
                   <td class="t_r">
-                     <select class="w80 pd3 fs15 t_r">
+                     <select class="w80 pd3 fs15 t_r" name="method_pay">
                         <?
                         foreach($arrayPayMethod as $mid => $method){
                            ?>

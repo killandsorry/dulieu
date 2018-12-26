@@ -3,8 +3,10 @@ RewriteEngine On
 RewriteRule	^add$ add.php
 RewriteRule	^add-excell$ add_excell.php
 RewriteRule	^list$ list.php
+RewriteRule	^list-detail$ list_detail.php
 
 RewriteRule	^provider$ provider.php
+RewriteRule	^provider-history$ provider_history.php
 
 RewriteRule	^transfer-warehouse$ transfer_warehouse.php
 RewriteRule	^transfer-access$ transfer_access.php

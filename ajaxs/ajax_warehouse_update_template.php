@@ -36,7 +36,7 @@ if($id <= 0){
    );
    
    
-   $response   = $killWareHouse->update_template($dataUpdate);
+   $response   = $killWareHouseTemplate->update_template($dataUpdate);
    print_r($response);
    $result['code'] = $response['code'];
    $result['error'] = $response['error'];

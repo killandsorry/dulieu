@@ -1,56 +1,45 @@
-01/12/2018 06:19:21 PM /ajaxs/ajax_warehouse_update_template.php
- You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
-                                       usw_number = 50,
-' at line 7
-UPDATE user_warehouse_1 SET
-                                       usw_number_unit_parent = 5,
-                                       usw_number_unit_child   = 10,
-                                       usw_price_import     = 5000,
-                                       usw_price_export     = 0,
-                                       usw_lo  = '0'
-                                       usw_date_expires = 0,
-                                       usw_number = 50,
-                                       usw_total_money_import = 25000
-                                       WHERE usw_id = 60
-01/12/2018 06:19:30 PM /ajaxs/ajax_warehouse_update_template.php
- You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
-                                       usw_number = 50,
-' at line 7
-UPDATE user_warehouse_1 SET
-                                       usw_number_unit_parent = 5,
-                                       usw_number_unit_child   = 10,
-                                       usw_price_import     = 5000,
-                                       usw_price_export     = 0,
-                                       usw_lo  = '0'
-                                       usw_date_expires = 0,
-                                       usw_number = 50,
-                                       usw_total_money_import = 25000
-                                       WHERE usw_id = 60
-01/12/2018 06:20:28 PM /ajaxs/ajax_warehouse_update_template.php
- You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
-                                       usw_number = 50,
-' at line 7
-UPDATE user_warehouse_1 SET
-                                       usw_number_unit_parent = 5,
-                                       usw_number_unit_child   = 10,
-                                       usw_price_import     = 5000,
-                                       usw_price_export     = 0,
-                                       usw_lo  = '0'
-                                       usw_date_expires = 0,
-                                       usw_number = 50,
-                                       usw_total_money_import = 25000
-                                       WHERE usw_id = 60
-01/12/2018 06:21:09 PM /ajaxs/ajax_warehouse_update_template.php
- You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usw_date_expires = 0,
-                                       usw_number = 50,
-' at line 7
-UPDATE user_warehouse_1 SET
-                                       usw_number_unit_parent = 5,
-                                       usw_number_unit_child   = 10,
-                                       usw_price_import     = 5000,
-                                       usw_price_export     = 0,
-                                       usw_lo  = '0'
-                                       usw_date_expires = 0,
-                                       usw_number = 50,
-                                       usw_total_money_import = 25000
-                                       WHERE usw_id = 60
+16/12/2018 04:06:19 PM /soft/import/provider
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user_provider_1 
+/* 127.0.0.1 - L3NvZnQvaW1wb3J0L3Byb3ZpZGVyIC0gRjpEOlx4YW1wcF83' at line 2
+SELECT * FROM user_provider_1
+                                 WHERE 1 user_provider_1
+16/12/2018 04:06:51 PM /soft/import/provider
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user_provider_1 
+/* 127.0.0.1 - L3NvZnQvaW1wb3J0L3Byb3ZpZGVyIC0gRjpEOlx4YW1wcF83' at line 2
+SELECT * FROM user_provider_1
+                                 WHERE 1 user_provider_1
+20/12/2018 05:05:23 PM /soft/import/list-detail?bill_code=1812201537
+Unknown column 'usc_bill_codde' in 'where clause'
+SELECT * FROM user_stock_card_1
+                                  WHERE usc_bill_codde = 1812201537 
+                                  AND usc_card_type = 1
+24/12/2018 05:21:38 PM /ajaxs/save_quick_edit_in.php
+ Unknown column 'usb_remain' in 'field list'
+UPDATE user_bill_1 SET 
+                                          usb_total_money = 5800000,
+                                          usb_remain = 5800000
+                                          WHERE usb_bill_number = 1812241637 AND usb_bill_type = 1
+24/12/2018 05:22:00 PM /ajaxs/save_quick_edit_in.php
+ Unknown column 'usb_remain' in 'field list'
+UPDATE user_bill_1 SET 
+                                          usb_total_money = 3300000,
+                                          usb_remain = 3300000
+                                          WHERE usb_bill_number = 1812241637 AND usb_bill_type = 1
+24/12/2018 05:23:00 PM /ajaxs/save_quick_edit_in.php
+ Unknown column 'usb_remain' in 'field list'
+UPDATE user_bill_1 SET 
+                                          usb_total_money = 2900000,
+                                          usb_remain = 2900000
+                                          WHERE usb_bill_number = 1812241637 AND usb_bill_type = 1
+24/12/2018 05:23:58 PM /ajaxs/save_quick_edit_in.php
+ Unknown column 'usb_remain' in 'field list'
+UPDATE user_bill_1 SET 
+                                          usb_total_money = 5400000,
+                                          usb_remain = 5400000
+                                          WHERE usb_bill_number = 1812241637 AND usb_bill_type = 1
+24/12/2018 05:30:33 PM /soft/import/list?&page=3
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY usb_id DESC 
+/* 127.0.0.1 - L3NvZnQvaW1wb3J0L2xpc3Q/JnBhZ2U9MyAtIEY6RDp' at line 3
+SELECT * FROM user_bill_1
+                                 WHERE 1  AND usb_bill_type = 1 AND usb_date BETWEEN 1544742000 AND 1545692399 LIMIT 40,20
+                                 ORDER BY usb_id DESC

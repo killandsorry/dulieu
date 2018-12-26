@@ -79,7 +79,14 @@ class killProduct{
    }
    
    
-   // get product bby id
+   /**
+    * Get product by id
+    * @input : int
+    * :usp_id
+    * 
+    * return array() 
+    *
+    */
    function get_product_by_id($id = 0){
       global $admin_id, $child_id, $branch_id, $array_unit;
       
@@ -99,4 +106,33 @@ class killProduct{
       
       if(isset($row)) return $row;
    }
+   
+   /**
+    * Function update coc, price_inport, remain..
+    * 
+    */
+   function update_coc_remain($data = array()){
+      $result  = array(
+         'code' => 500,
+         'error' => ''
+      );
+      
+      $usp_id     = isset($data['usp_id'])? intval($data['usp_id']) : 0;
+      $usp_price_import_near  = isset($data['price_import'])? doubleval($data['price_import']) : 0;
+      $usp_remain = isset($data['remain'])? intval($data['remain']) : 0;
+      
+      if($usp_id <= 0){
+         $result['error']   = 'Không có id sản phẩm';
+      }else{
+      
+         $db_ex      = new db_execute("UPDATE " . TABLE_PRODUCT . " SET 
+                                       usp_price_import_near = " . $usp_price_import_near . ",
+                                       usp_remain = " . $usp_remain . "
+                                       WHERE usp_id = " . intval($usp_id) . "
+                                       AND usp_branch_id = " . BRANCH_ID . " AND usp_use_parent_id = " . ADMIN_ID);
+         unset($db_ex);
+         $result['code']   = 200;
+      }
+      return $result;
+   }      
 }

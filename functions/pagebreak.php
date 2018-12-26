@@ -35,7 +35,7 @@ function generatePageBar($page_prefix, $current_page, $page_size, $total_record,
 		if(($start_page != 1) && ($num_of_page > 1)){
 			if($obj_response != '') $href = 'javascript:load_data(\'' . $url . $page_query_string . '1' . '\',\'' . $obj_response . '\')';
 			else $href = $url . $page_query_string . '1';
-			$page_bar .=  '<li><a title="' . $title_page_first . '" href="' . $href . '" class="' . $normal_class . '">' . $first . '</a></li>';
+			$page_bar .=  '<li class="' . $normal_class . '"><a title="' . $title_page_first . '" href="' . $href . '">' . $first . '</a></li>';
 		}
 	}
 	//Write previous page
@@ -47,7 +47,7 @@ function generatePageBar($page_prefix, $current_page, $page_size, $total_record,
 			if(($start_page > 1) && ($break_type == 1 || $break_type == 2)){
 				$page_dot_before = $start_page - 1;
 				if($page_dot_before < 1) $page_dot_before = 1;
-				$page_bar .= "<li><a title='" . $title_page_number . $page_dot_before . "' href='" . $url . $page_query_string . $page_dot_before . "' class='" . $normal_class . "'>..</a><li>";
+				$page_bar .= "<li class='" . $normal_class . "'><a title='" . $title_page_number . $page_dot_before . "' href='" . $url . $page_query_string . $page_dot_before . "'>..</a></li>";
 			}
 		}
 	}
@@ -78,10 +78,10 @@ function generatePageBar($page_prefix, $current_page, $page_size, $total_record,
 			if(($end_page < $num_of_page) && ($break_type == 1 || $break_type == 2)){
 				$page_dot_after = $end_page + 1;
 				if($page_dot_after > $num_of_page) $page_dot_after = $num_of_page;
-				$page_bar .= "<li><a title='" . $title_page_number . $page_dot_after . "' href='" . $url . $page_query_string . $page_dot_after . "' class='" . $normal_class . "'>..</a></li>";
+				$page_bar .= "<li class='" . $normal_class . "'><a title='" . $title_page_number . $page_dot_after . "' href='" . $url . $page_query_string . $page_dot_after . "' class='" . $normal_class . "'>..</a></li>";
 			}
 			//if(($end_page < $num_of_page) && ($break_type == 1 || $break_type == 2)) echo '<b class="' . $normal_class . '">..</b>';
-			$page_bar .= '<li><a title="' . $title_page_next . '" href="' . $href . '" class="' . $normal_class . '">' . $next . '</a></li>';
+			$page_bar .= '<li class="' . $normal_class . '"><a title="' . $title_page_next . '" href="' . $href . '" >' . $next . '</a></li>';
 		}
 	}
 	//Write last page
@@ -89,7 +89,7 @@ function generatePageBar($page_prefix, $current_page, $page_size, $total_record,
 		if(($end_page < $num_of_page) && ($num_of_page > 1)){
 			if($obj_response != '') $href = 'javascript:load_data(\'' . $url . $page_query_string . $num_of_page . '\',\'' . $obj_response . '\')';
 			else $href = $url . $page_query_string . $num_of_page;
-			$page_bar .= '</li><a title="' . $title_page_last . '" href="' . $href . '" class="' . $normal_class . '">' . $last . '</a></li>';
+			$page_bar .= '<li class="' . $normal_class . '"><a title="' . $title_page_last . '" href="' . $href . '" >' . $last . '</a></li>';
 		}
 	}
 	return $page_bar;

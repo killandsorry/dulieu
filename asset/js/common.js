@@ -20,10 +20,28 @@ $(function(){
       $(this).val(formatNumber(m));
    });
    
-   /* phần khuyến mại */
+   /* show bonus */
    $('.show_discount').click(function(event){
       event.stopPropagation();
    });
+   
+   /* add datepicker */
+   $('.filldate').Zebra_DatePicker({
+      format: 'd/m/Y',
+      days : ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+      months : ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+   });
+   
+   /*caculator scall from filter and set padding top for listcontent*/
+   if($('#listcontent').length){
+      if($('#frm_filter').length){
+         var _height_filter = $('#frm_filter').height() + 20;
+         $('#listcontent').css('padding-top', _height_filter+'px');
+         
+         var _height_total = $('#frm_total').height() + 6;
+         $('#listcontent').css('padding-bottom', _height_total+'px');
+      }
+   }
 });
 
 
@@ -43,11 +61,15 @@ function parse_type_number(vl){
 
 
 var pm = {
+   reload : function(){
+      window.location.reload();      
+   },
    myConfirm : function(msg, fnyes, fnno){
       var confirmBox = $("#confirm");
-      confirmBox.find(".message").text(msg);
+      confirmBox.find(".message").html(msg);
       confirmBox.find(".yes,.no").unbind().click(function() {
          confirmBox.hide();
+         pm.closeOverlay();
       });
       pm.openOverlay();
       confirmBox.find(".yes").click(fnyes);
@@ -57,11 +79,12 @@ var pm = {
    
    myAlert : function(msg){
       pm.openOverlay();
+      $('#alert .message').html(msg);
       $('#alert').removeClass('hide');
    },
    
    closeAlert : function(){
-      pm.close_overlay();
+      pm.closeOverlay();
       $('#alert').addClass('hide');
    },
    
@@ -71,6 +94,43 @@ var pm = {
    
    closeOverlay : function(){
       $('#ovl').addClass('hide');
+   },
+   
+   ajax_loadding : function(){
+      if($('#ajax_status').length){
+         $('#ajax_status')
+            .text('Đang xử lý ...')
+            .removeClass('hide')
+            .addClass('ajloading');
+      }else{
+         $('body').append('<span id="ajax_status" class="ajloadding">Đang xử lý ...</span>');
+      }
+      
+   },   
+   ajax_success : function(){
+      if($('#ajax_status').length){
+         $('#ajax_status')
+            .text('Thành công')
+            .removeClass('hide')
+            .addClass('ajsuccess');
+      }else{
+         $('body').append('<span id="ajax_status" class="ajsuccess">Thành công</span>');
+      }
+      pm.ajax_close();
+   },
+   ajax_error : function(){
+      if($('#ajax_status').length){
+         $('#ajax_status')
+            .text('Lỗi')
+            .removeClass('hide')
+            .addClass('ajerror');
+      }else{
+         $('body').append('<span id="ajax_status" class="ajerror">Lỗi</span>');
+      }
+      pm.ajax_close();
+   },
+   ajax_close : function(){
+      setTimeout(function(){$('#ajax_status').addClass('hide')}, 2000);
    },
    
    /*show help*/
@@ -83,9 +143,54 @@ var pm = {
       
    },
    
+   /* trigger save */
+   trigger_save : function(ev, obj){
+      if(ev.keyCode == 13 ||  ev.which == 13){
+         $(obj).next('.trigger_save').trigger('click');
+      }
+   },
+   
+   /* quick save edit stock card */
+   save_quick_edit_in : function(obj){
+      var _stock_id  = parseInt ($(obj).parents('.quick_edit').data('id')) || 0;
+      var _old_value = parseInt ($(obj).data('old')) || 0;
+      var _new_value = parse_type_number($(obj).parent().find('input').val()) || 0;
+      var _field     = $(obj).data('field') || '';
+      
+      if(_stock_id > 0 && _field != '' && _new_value >= 0){
+         pm.ajax_loadding();
+         $.post(
+            '/ajaxs/save_quick_edit_in.php',
+            {
+               stock_id : _stock_id,
+               old_value : _old_value,
+               new_value : _new_value,
+               field : _field
+            },
+            function(res){
+               
+               if(res.code == 200){
+                  $(obj).parents('.quick_edit').find('.qview input').val( formatNumber(_new_value) );
+                  pm.ajax_success();
+               }else{
+                  pm.myAlert(res.error);
+                  pm.ajax_error();
+               }
+               pm.ajax_close();
+               action_small.close_all_edit();
+            },
+            'json'
+         )
+      }      
+   },
+   
    show_quick_add_product : function(data){
-      var _temid = data.temp || 0;
-      var _name = data.name || '';
+      var _temid = 0;
+      var _name = '';
+      if(typeof data == 'object'){
+         _temid = data.temp || 0;
+         _name = data.name || '';
+      }
       
       
       $('#quick_add_product').removeClass('hide');
@@ -118,7 +223,10 @@ var pm = {
    },
    
    show_quick_add_provider : function(data){
-      var _name = data.name || '';
+      var _name = '';
+      if(typeof data == 'object'){
+         _name = data.name || '';
+      }
       $('#quick_add_provider').removeClass('hide');
       this.openOverlay();      
       $('#prd_name').val(_name).focus();
@@ -133,13 +241,18 @@ var pm = {
    /* quick add product */
    quick_add_provider : function(){
       var data = $('#frm_quick_add_provider').serialize();
+      console.log(data);
       $.post(
          '/ajaxs/ajax_provider_quick_add.php',
          data,
          function(res){
+            /* page import product */
             if($('#provider_name').length > 0){
                $('#provider_name').val(res.data.name);
                $('#provider_id').val(res.data.id);
+            }else{
+               /* page provider manager */
+               location.reload();
             }
             pm.hide_quick_add_provider();
          },
@@ -147,6 +260,92 @@ var pm = {
       );
       
       return false;
+   },
+   
+   /* delete provider */
+   delete_provider : function(id){
+      if(id <= 0){
+         pm.myAlert('Không có dữ liệu');
+         return false;
+      }else{
+         pm.myConfirm('Bạn có muốn xóa bản ghi này không?', 
+            function(){
+               $.post(
+                  '/ajaxs/ajax_provider_del.php',
+                  {id : id},
+                  function(res){
+                     if(res.code == 200){
+                        $('#item_' + res.data.id).remove();
+                     }else{
+                        pm.myAlert(res.error);
+                     }
+                  },
+                  'json'
+               );
+            }, 
+            function(){
+               
+            }
+         );
+      }
+      
+      
+   },
+   
+   /* delete bill */
+   delete_bill : function(data){
+      var bill_code = data.bill_code || 0;
+      var bill_type  = data.bill_type || 0;
+      if(id <= 0){
+         pm.myAlert('Không có dữ liệu');
+         return false;
+      }else{
+         pm.myConfirm('Bạn có muốn xóa hóa đơn này không?', 
+            function(){
+               $.post(
+                  '/ajaxs/ajax_bill_del.php',
+                  {
+                     bill_code : bill_code,
+                     bill_type : bill_type
+                  },
+                  function(res){
+                     if(res.code == 200){
+                        dialog.close();
+                        $('#item_' + res.data.id).remove();
+                     }else{
+                        pm.myAlert(res.error);
+                     }
+                  },
+                  'json'
+               );
+            }, 
+            function(){
+               
+            }
+         );
+      }
+   },
+   
+   /* edit provider */
+   provider_edit_show : function(data){
+      var _id = data.id || 0;
+      var _name = data.name || '';
+      var _phone = data.phone || '';
+      var _address = data.address || '';
+      var _contact = data.contact || '';
+      
+      /* gắn biến */
+      $('#prd_phone').val(_phone);
+      $('#prd_address').val(_address);
+      $('#prd_contact').val(_contact);
+      $('#prd_id').val(_id);
+      
+      $('#quick_add_provider').removeClass('hide');
+      $('#quick_add_provider .quick_title').text('Sửa thông tin nhà cung cấp');
+      $('#quick_add_provider .btn_do').val('Lưu lại');
+      this.openOverlay();      
+      $('#prd_name').val(_name).focus();
+         
    },
    
    select_provider : function(data){
@@ -182,6 +381,22 @@ var pm = {
    /* clear barcode text */
    clear_search : function(){
       $('#barcode').val('').focus();
+   },
+   
+   /* open popup iframe */
+   show_popup : function(data){
+      var _id,_url,_option;
+      
+      if(typeof data.id != 'undefined') _id = data.id;
+      if(typeof data.url != 'undefined') _url = data.url;
+      if(typeof data.option != 'undefined') _option = data.option;
+      
+      if(_id <= 0) return false;
+      
+      var elm = $('#history_im_ex');        
+      $('#ovl_alert').removeClass('hide');
+      elm.html('<iframe style="width: 100%;height: 100%;border: none;" src="/banhang/history.php?urlreturn='+url+'&pro_id='+pid+'"></iframe>');
+      elm.removeClass('hide'); 
    },
    
    /* change đơn giá */
@@ -361,6 +576,8 @@ var calc = {
    }
 }
 
+
+/* caculator discout,bonus */
 var discount = {
    chose : function(obj){
       var _type = $(obj).data('dis') || 1; //1: vnđ, 2: %
@@ -387,4 +604,62 @@ var discount = {
    caculator : function(obj){
       
    }
+}
+
+
+/* dialog content */
+var dialog = {
+   
+   show : function(data){
+      var _url = data.url || '';
+      var _option = data.option || '';
+      var _width  = data.w || '90%';
+      var _height  = data.h || '90%';
+      var _mtop  = data.t || '10%';
+      if(_url == '') return false;
+      
+      var full_url = _url + ((_option != '')? '?' + _option : '');
+      console.log(full_url);
+      var elm = $('#dcontent'); 
+      elm.css({'width':_width, 'height':_height, 'margin-top' : _mtop, 'max-width' : '1150px'});       
+      pm.openOverlay();
+      elm.find('#ifr').html('<iframe style="width: 100%; height: 100%;border: none;" src="'+ full_url +'"></iframe>');
+      $('#dialog').removeClass('hide');
+   },
+   
+   close : function(){
+      $('#dcontent #ifr').html('');
+      $('#dialog').addClass('hide');
+      pm.closeOverlay();
+   }
+   
+}
+
+/* action small in dialog */
+var action_small = {
+   
+   /* edit in dialog */
+   show_edit : function(obj){
+      $('.qedit').addClass('hide');
+      $('.qview').removeClass('hide');
+      $('.qedit input').val('');
+      $(obj).parents('.quick_edit').find('.qview').addClass('hide');
+      $(obj).parents('.quick_edit').find('.qedit')
+                                                   .removeClass('hide')
+                                                   .find('input').focus();
+   },
+   
+   /* close edit in dialog */
+   close_edit : function(obj){
+      $('.qview').removeClass('hide');
+      $(obj).parents('.quick_edit').find('.qview').removeClass('hide');
+      $(obj).parents('.quick_edit').find('.qedit').addClass('hide');
+      
+   },
+   
+   close_all_edit : function(){
+      $('.qedit').addClass('hide');
+      $('.qview').removeClass('hide');
+   }
+   
 }
